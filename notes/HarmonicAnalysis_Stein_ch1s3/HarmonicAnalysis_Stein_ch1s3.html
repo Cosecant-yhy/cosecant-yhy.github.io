@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Yin Heyue">
+<meta name="dcterms.date" content="2026-10-15">
+
+<title>Note of Harmonic Analysis by Stein – Henry‘s Math Notes</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-445b8638c3d06994fee0907d791121c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#recall" id="toc-recall" class="nav-link active" data-scroll-target="#recall"><span class="header-section-number">1</span> Recall</a></li>
+  <li><a href="#vitali-covering-lemma" id="toc-vitali-covering-lemma" class="nav-link" data-scroll-target="#vitali-covering-lemma"><span class="header-section-number">2</span> Vitali Covering Lemma</a></li>
+  <li><a href="#maximum-function" id="toc-maximum-function" class="nav-link" data-scroll-target="#maximum-function"><span class="header-section-number">3</span> Maximum Function</a></li>
+  <li><a href="#whitney-covering-lemma" id="toc-whitney-covering-lemma" class="nav-link" data-scroll-target="#whitney-covering-lemma"><span class="header-section-number">4</span> Whitney Covering Lemma</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Note of Harmonic Analysis by Stein</h1>
+<p class="subtitle lead">ch.1 s.3 Covering Lemmas and the Maximal Function</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Yin Heyue </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 15, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<style>
+.inline-detail-trigger {
+  cursor: pointer;
+  text-decoration: underline dotted;
+  font-size: 0.9em;
+  opacity: 0.75;
+}
+
+.inline-detail-content {
+  display: none;
+  margin: 0.4em 0 0.6em 1.5em;
+  padding-left: 0.8em;
+  border-left: 2px solid #aaa;
+  font-size: 0.92em;
+  opacity: 0.9;
+}
+
+/* 只展开当前 wrapper 的直接子内容 */
+.inline-detail-wrapper.open > .inline-detail-content {
+  display: block;
+}
+
+.quarto-figure {
+  text-align: center;
+}
+
+.quarto-figure figcaption {
+  text-align: center;
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".inline-detail-trigger").forEach(function(trigger) {
+    trigger.addEventListener("click", function (event) {
+      event.stopPropagation();
+
+      const wrapper = trigger.closest(".inline-detail-wrapper");
+
+      if (wrapper) {
+        wrapper.classList.toggle("open");
+      }
+    });
+  });
+});
+</script>
+<div class="hidden">
+<p><span class="math display">\[
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\diam}{\mathrm{diam}}
+\newcommand{\dist}{\mathrm{dist}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\norm}[1]{\left\|#1\right\|}
+\newcommand{\fint}{\mathop{\rlap{-}\!\!\int}}
+\]</span></p>
+</div>
+<section id="recall" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Recall</h1>
+<p>Postulates: In <span class="math inline">\(\R^n\)</span>, equipred with Euclidean topology. Given Radon measure <span class="math inline">\(\mu\)</span> with <span class="math inline">\(\mu(\R^n)&gt;0\)</span>. For each <span class="math inline">\(x\)</span>, denote <span class="math inline">\(\{B_\delta(x)\}\)</span> a serier of nonempty open bounded sets, parameterized by <span class="math inline">\(\delta\in(0,\infty)\)</span>, called “balls” with “center” <span class="math inline">\(x\)</span> and “radius” <span class="math inline">\(\delta\)</span>. We need following postulates:</p>
+<p><span id="pstlt-0"><strong>(0)</strong></span> <strong>(<em>monotonicity</em> w.r.t. <span class="math inline">\(\delta\)</span>)</strong> <span class="math inline">\(B_\delta(x)\subset B_{\delta'}(x)\)</span>, <span class="math inline">\(\forall \delta&lt;\delta'\)</span>.</p>
+<p><span id="pstlt-1"><strong>(1)</strong></span> <strong>(engulfing property)</strong> <span class="math inline">\(\exists C_1&gt;1\)</span>, s.t. <span class="math inline">\(B_\delta(x)\cap B_{\delta}(y)\neq\varnothing\Rightarrow B_\delta(y)\subset B_{C_1\delta}(x)\)</span>.</p>
+<p><span id="pstlt-2"><strong>(2)</strong></span> <strong>(doubling property)</strong> <span class="math inline">\(\exists C_2&gt;0\)</span>, s.t. <span class="math inline">\(\mu(B_{C_1\delta}(x))\le C_2\mu(B_\delta(x))\)</span>.</p>
+<p><span id="pstlt-12p"><strong>(1,2)’</strong></span> <strong>(weaker version of <a href="#pstlt-1">(1)</a>+<a href="#pstlt-2">(2)</a>)</strong> For each ball <span class="math inline">\(B=B_\delta(x)\)</span>, define <span class="math display">\[B^*:=\bigcup_{\substack{\text{$B'\cap B\ne\varnothing$\\$B'$ with radius of $\delta$}}}B'.\]</span> Then <span class="math inline">\(\exists C_2 &gt; 0\)</span>, s.t. <span class="math inline">\(\mu(B^*_\delta(x))\le C_2\mu(B_\delta(x))\)</span>.</p>
+<p><span id="pstlt-3"><strong>(3)</strong></span> <span class="math inline">\(\bigcap_{\delta&gt;0}\bar B_\delta(x)=\{x\}\)</span>, <span class="math inline">\(\bigcup_{\delta&gt;0}B_\delta(x)=\R^n\)</span>.</p>
+<p><span id="pstlt-4"><strong>(4)</strong></span> <span class="math inline">\(\forall\)</span> open set <span class="math inline">\(U\)</span>, <span class="math inline">\(\forall \delta&gt;0\)</span>, function <span class="math inline">\(x\mapsto \mu(B_\delta(x)\cap U)\in C^0\)</span>.</p>
+</section>
+<section id="vitali-covering-lemma" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Vitali Covering Lemma</h1>
+<div id="lem-vitali-cover" class="lemma theorem">
+<p><span class="theorem-title"><strong>Lemma 1 (finite Vitali covering lemma)</strong></span> Under the postulates <a href="#pstlt-0">(0)</a>, <a href="#pstlt-12p">(1,2)’</a>. <span class="math inline">\(E\)</span>: <span class="math inline">\(\mu\)</span>-measurable, <span class="math inline">\(E\subset\bigcup_{i=1}^n B_i\)</span>, <span class="math inline">\(B_i\)</span>: balls. Then <span class="math inline">\(\exists\)</span> disjoint subcollection <span class="math inline">\(\{B_{i_k}\}_{k=1}^m\)</span> s.t. <span class="math display">\[\sum_{k=1}^m\mu(B_{i_k})\ge\frac1 {C_2}\mu(E).\]</span></p>
+</div>
+<p><span class="inline-detail-wrapper"> <span class="inline-detail-trigger"><strong>Proof.</strong></span> <span class="inline-detail-content"> Pick subcollection, still denoted by <span class="math inline">\(\{B_k\}_{k=1}^\infty\)</span>, by the following picking rule: <br> <span><span class="math inline">\(\bullet\)</span></span> Let <span class="math inline">\(B_1\)</span> be a ball of the origin collection of maximal radius. <br> <span><span class="math inline">\(\bullet\)</span></span> Next choose <span class="math inline">\(B_2\)</span> to have maximal radius among the subcollection of balls disjoint with <span class="math inline">\(B_1\)</span>. <br> <span><span class="math inline">\(\bullet\)</span></span> We continue this process until we can go no further. <br> Obviousely, <span class="math inline">\(\{B_k\}\)</span> picked by above process is disjoint. And it’s enough to prove <span class="math display">\[E\subset\bigcup_k B_{k}^*\]</span> <span class="inline-detail-wrapper"> <span class="inline-detail-trigger">(why?)</span> <span class="inline-detail-content"> If it holds, then by <a href="#pstlt-12p">(1,2)’’</a> <span class="math display">\[\mu(E) \le \sum_{k}\mu(B^*_k) \le \sum_{k}C_2\mu(B_k).\]</span> </span> </span>, where <span class="math inline">\(B^*\)</span> defined as <a href="#pstlt-12p">(1,2)’</a>. <br> <span class="math inline">\(\forall x\in E\)</span>, if <span class="math inline">\(x\)</span> in some <span class="math inline">\(B_k\)</span>, done; if not, then <span class="math inline">\(x\)</span> in a ball <span class="math inline">\(B_x=B_{\delta_x}(z_x)\)</span> not added into <span class="math inline">\(\{B_k\}\)</span>. Pick ball <span class="math inline">\(B_k=B_{\delta_k}(z_k)\)</span> to have maximal radius among the subcollection intersect with <span class="math inline">\(B_x\)</span>. We have <span class="math inline">\(\delta_x\le\delta_k\)</span> <span class="inline-detail-wrapper"> <span class="inline-detail-trigger">(why?)</span> <span class="inline-detail-content"> If <span class="math inline">\(\delta_x&gt;\delta_k\)</span>, then every ball having bigger radius than <span class="math inline">\(B_{\delta_x}(z_x)\)</span> is disjoint with <span class="math inline">\(B_{\delta_x}(z_x)\)</span>. Hence <span class="math inline">\(B_{\delta_x}(z_x)\)</span> should be added into <span class="math inline">\(\{B_k\}\)</span>, contradiction. </span> </span>. Combine with <a href="#pstlt-0">(0)</a> and definition of <span class="math inline">\(B_k^*\)</span>, <span class="math inline">\(x\in B_k^*\)</span> <span class="inline-detail-wrapper"> <span class="inline-detail-trigger">(why?)</span> <span class="inline-detail-content"> By <a href="#pstlt-0">(0)</a>, <span class="math inline">\(B_{\delta_x}(z_x)\subset B_{\delta_k}(z_x)\)</span>. By the definition of <span class="math inline">\(B^*_k\)</span>, <span class="math inline">\(B_{\delta_k}(z_x)\)</span> has the same radius with <span class="math inline">\(B_{\delta_k}(z_k)\)</span>, <span class="math inline">\(B_{\delta_k}(z_k)\cap B_{\delta_k}(z_k)\ne\varnothing\)</span>. So <span class="math inline">\(x\in B_{\delta_x}(z_x)\subset B_{\delta_k}(z_x)\subset B^*_{\delta_k}(z_k)\)</span>. </span> </span>,done. <span class="math inline">\(\square\)</span> </span> </span></p>
+</section>
+<section id="maximum-function" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Maximum Function</h1>
+<div id="def-max-func" class="definition theorem">
+<p><span class="theorem-title"><strong>Definition 1 (average, maximal function, uncentered maximal function)</strong></span> <span class="math display">\[A_\delta(f)(x):=\frac{1}{\mu(B_{\delta}(x))}\int_{B_{\delta}(x)} f.\]</span> <span class="math display">\[M(f)(x):=\sup_{\delta&gt;0} A_\delta(|f|)(x)=\sup_{\delta&gt;0}\frac{1}{\mu(B_{\delta}(x))}\int_{B_{\delta}(x)}|f|.\]</span> <span class="math display">\[\tilde{M}(f)(x):=\sup_{B\ni x} \frac{1}{\mu(B)}\int_B |f|.\]</span></p>
+</div>
+<p>We have</p>
+<ul>
+<li><p><span class="math inline">\(M(f)\le\tilde{M}(f).\)</span></p></li>
+<li><p>If <a href="#pstlt-1">(1)</a>+<a href="#pstlt-2">(2)</a> hold, then <span class="math inline">\(\tilde{M}(f)(x)\le C_2M(f)(x).\)</span> <span class="inline-detail-wrapper"> <span class="inline-detail-trigger">(pf)</span> <span class="inline-detail-content"> <span class="math inline">\(\forall B=B_{\delta}(z)\ni x\)</span>. <span class="math inline">\(\because B_{\delta}(z)\cap B_{\delta}(x)\ne\varnothing\)</span>, by <a href="#pstlt-1">(1)</a>,<span class="math inline">\(B_{\delta}(z)\subset B_{C_1\delta}(x).\)</span> By <a href="#pstlt-2">(2)</a> <span class="math display">\[\begin{align*}
+          \frac 1{\mu(B)}\int_B|f|
+          &amp; \le \frac 1{\mu(B)}\int_{B_{C_1\delta}(x)}|f| \\
+          &amp; \le C_2 \frac 1{\mu(B_{C_1\delta}(x))}\int_{B_{C_1\delta}(x)}|f| \\
+          &amp; \le C_2 \tilde M(f)(x).
+      \end{align*}\]</span> Take <span class="math inline">\(\sup_{B\ni x}\)</span>, done. <span class="math inline">\(\square\)</span> </span> </span></p></li>
+<li><p><span class="math inline">\(\tilde{M}(f)\)</span>: l.s.c. (inverse image of <span class="math inline">\((a,\infty]\)</span> is open). <span class="inline-detail-wrapper"> <span class="inline-detail-trigger">(pf)</span> <span class="inline-detail-content"> <span class="math inline">\(E_\alpha:=\{\tilde M(f)&gt;\alpha\}\)</span>. <span class="math inline">\(\forall x\in E_\alpha\)</span>, <span class="math inline">\(\exists\)</span> open ball <span class="math inline">\(B\ni x\)</span>, s.t. <span class="math inline">\(\frac1{\mu(B)}\int_B|f|&gt;\alpha\)</span>. Then $x’B, <span class="math inline">\(\tilde M(f)(x')\ge \frac1{\mu(B)}\int_B|f|&gt;\alpha\)</span>, that shows <span class="math inline">\(B\subset E_a\)</span>. Hence <span class="math inline">\(E_\alpha\)</span>: open. </span> </span> <br> <!-- With this property, we can show that $\tilde{M}(f)$ is measurable instead of using [(4)](#pstlt-4) 
+<span class="inline-detail-wrapper">
+  <span class="inline-detail-trigger">(note)</span>
+  <span class="inline-detail-content">
+      If [(4)](#pstlt-4) holds, then function 
+      $$x\mapsto $$the fact that $\tilde{M}(f)$ is the supremum of a countable collection of measurable functions.
+  </span>
+</span> --></p></li>
+</ul>
+<div id="thm-max-func-properties" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (properties of the maximal function)</strong></span> Under the postulates <a href="#pstlt-0">(0)</a>+<a href="#pstlt-12p">(1,2)’</a>, we have</p>
+<ol type="1">
+<li><p><span class="math inline">\(f\in L^p(d\mu)\)</span>, <span class="math inline">\(1\le p\le\infty\)</span>, then <span class="math inline">\(M(f)&lt;\infty\)</span>, a.e..</p></li>
+<li><p><span class="math inline">\(f\in L^1(d\mu)\)</span>, then <span class="math display">\[\mu(\{M(f)&gt;\alpha\})\le \frac{C_2}{\alpha}\int|f|, \quad \forall\alpha&gt;0.\]</span></p></li>
+<li><p><span class="math inline">\(f\in L^p(d\mu)\)</span>, <span class="math inline">\(1&lt;p\le\infty\)</span>, then <span class="math inline">\(M(f)\in L^p(d\mu)\)</span> and <span class="math display">\[\norm{M(f)}_p\le C_p\norm{f}_p,\quad \text{where $C_p$ depends on $C_2,p$}.\]</span></p></li>
+</ol>
+</div>
+<p><span class="inline-detail-wrapper"> <span class="inline-detail-trigger"><strong>Proof.</strong></span> <span class="inline-detail-content"> <strong>Prove 2</strong>: <span class="math inline">\(E_\alpha := \{\tilde M(f)&gt;\alpha\}\)</span>. Pick <span class="math inline">\(\forall\)</span> compact <span class="math inline">\(K\subset E_\alpha\)</span>. Then <span class="math inline">\(\forall x\in K\)</span>, <span class="math inline">\(\exists\)</span> ball <span class="math inline">\(B_x\ni x\)</span>, s.t. <span class="math display">\[\begin{align*}
+            \frac{1}{\mu(B_x)}\int_{B_x}|f|&gt;\alpha.
+        \end{align*}\]</span> Select a finite cover <span class="math inline">\(\{B_{i}\}_{i=1}^n\)</span> of <span class="math inline">\(K\)</span>. By <a href="#lem-vitali-cover">finite Vitali covering lemma</a>, select a disjoint subcover <span class="math inline">\(\{B_{i_k}\}_{k=1}^m\)</span>, s.t. <span class="math display">\[\begin{align*}
+            \mu(K)
+            \le C_2\sum_{k=1}^m\mu(B_{i_k})
+            &lt;\frac{C_2}{\alpha}\sum_{k=1}^m\int_{B_{i_k}}|f|
+            \le \frac{C_2}{\alpha}\int|f|.
+        \end{align*}\]</span> Take <span class="math inline">\(\sup\limits_{\substack{\text{$K$:compact\\$K\subset E$}}}\)</span> <span class="inline-detail-wrapper"> <span class="inline-detail-trigger">(note)</span> <span class="inline-detail-content"> <span class="math inline">\(\because \tilde{M}(f)\)</span>: l.s.c., <span class="math inline">\(E_\alpha\)</span>: open. <span class="math inline">\(\therefore\)</span> we can use the inner regularity property of Radon measure <span class="math inline">\(\mu\)</span>: <span class="math display">\[\mu(E)=\sup_{\substack{\text{$K$:compact\\$K\subset E$}}}\mu(K),\quad \forall E\text{: open}.\]</span> </span> </span>, done. <br> <strong>Prove 3</strong>: When <span class="math inline">\(p=\infty\)</span> easy to prove <span class="inline-detail-wrapper"> <span class="inline-detail-trigger">(really?)</span> <span class="inline-detail-content"> If <span class="math inline">\(f\in L^\infty\)</span>, then <span class="math inline">\(\forall x\in\R^n\)</span> <span class="math display">\[M(f)(x)\le \tilde{M}(f)(x)=\sup_{B\ni x}\frac{1}{\mu(B)}\int_{B}|f|\,d\mu\le \|f\|_{L^\infty}.\]</span> </span> </span>. Only consider <span class="math inline">\(1 &lt; p &lt; \infty\)</span>, cut-off: <span class="math display">\[\tilde{f}:=\begin{cases}
+        f,\quad &amp; |f|&gt;\frac\alpha 2 \\
+        0,\quad &amp; |f|\le\frac\alpha 2
+        \end{cases}\in L^1.\]</span> We have <span class="math inline">\(\tilde M(f)\le \tilde M(\tilde{f})+\frac\alpha 2\)</span> <span class="inline-detail-wrapper"> <span class="inline-detail-trigger">(why?)</span> <span class="inline-detail-content"> <span class="math inline">\(\because f\le\tilde{f}+\frac\alpha 2\)</span>, <span class="math inline">\(\therefore\tilde M(f)\le \tilde M(\tilde{f}+\frac\alpha 2)=\tilde M(\tilde{f})+\frac\alpha 2\)</span>. </span> </span>. Then <span class="math inline">\(\{\tilde M(f)&gt;\alpha\}\subset\{\tilde M(\tilde{f})&gt;\frac\alpha 2\}\)</span> <span class="inline-detail-wrapper"> <span class="inline-detail-trigger">(why?)</span> <span class="inline-detail-content"> <span class="math inline">\(\because \tilde M(f)&gt;\alpha\implies \tilde M(\tilde{f})+\frac\alpha 2&gt;\alpha\implies \tilde M(\tilde{f})&gt;\frac\alpha 2\)</span>. </span> </span>. By conclusion 2 <span class="math display">\[\begin{align*}
+            \mu(\{\tilde M(f)&gt;\alpha\})
+            \le \mu\left(\left\{\tilde M(\tilde{f})&gt;\frac\alpha 2\right\}\right)
+            \le \frac{2C_2}{\alpha}\int|\tilde{f}|
+            = \frac{2C_2}{\alpha}\int_{\{|f|&gt;\frac\alpha 2\}}|f|.
+        \end{align*}\]</span> Combine with the <em>layer-cake representation</em> <span class="inline-detail-wrapper"> <span class="inline-detail-trigger">(note)</span> <span class="inline-detail-content"> <strong>(layer-cake representation)</strong> <span class="math inline">\(\forall f&gt;0\)</span>, <span class="math inline">\(f\)</span>: <span class="math inline">\(\mu\)</span>-measurable, <span class="math inline">\(\forall p&gt;0\)</span>, we have <span class="math display">\[\int f^p\,d\mu=p\int_0^\infty \alpha^{p-1}\mu(\{f&gt;\alpha\})\,d\alpha.\]</span> This equation allows <span class="math inline">\(f\not\in L^p\)</span>, i.e.&nbsp;allow both sides to be <span class="math inline">\(\infty\)</span>. </span> </span>. We have, for <span class="math inline">\(1 &lt; p &lt; \infty\)</span>, <span class="math display">\[\begin{align*}
+            \int \tilde M(f)^p
+            &amp; =p\int_0^\infty \alpha^{p-1}\mu(\{\tilde M(f)&gt;\alpha\})\,d\alpha \\
+            &amp; \le p\int_0^\infty \alpha^{p-1}\frac{2C_2}{\alpha}\int_{\{|f|&gt;\frac\alpha 2\}}|f|\,d\mu\,d\alpha \\
+            &amp; =2pC_2\int_{\R^n} |f| \int_0^{2|f|}\alpha^{p-2}\,d\alpha\,d\mu \\
+        &amp; =\frac{2^p p C_2}{p-1}\int |f|^p\,d\mu.
+        \end{align*}\]</span> Combine with <span class="math inline">\(M(f)\le \tilde M(f)\)</span>, done. <br> <strong>Peove 1</strong>: For <span class="math inline">\(1 &lt; p\le\infty\)</span>, by conclusion 3, we have <span class="math inline">\(\|\tilde M(f)\|_p&lt;\infty\)</span>. Hence <span class="math inline">\(M(f)&lt;\infty\)</span>, a.e.. For <span class="math inline">\(p=1\)</span>, let <span class="math inline">\(\alpha\)</span> in conclusion 2 goes to <span class="math inline">\(\infty\)</span>, done. <span class="math inline">\(\square\)</span> </span> </span></p>
+<div id="rem-max-func-properties" class="proof remark">
+<p><span class="proof-title"><em>Remark 1</em>. </span>Conclusion 3 is fause for <span class="math inline">\(p=1\)</span>. For example, let <span class="math inline">\(f=\boldsymbol{1}_{[0,1]}\)</span>, then <span class="math inline">\(M(f)(x)\sim \frac{1}{|x|}\)</span> as <span class="math inline">\(|x|\to\infty\)</span>, hence <span class="math inline">\(M(f)\not\in L^1\)</span>. And in the proof of conclusion 3, we find the bound of <span class="math inline">\(C_p=2\left(\frac{C_2p}{p-1}\right)^{1/p}=O\left(\frac{1}{p-1}\right)\to\infty\)</span>, as <span class="math inline">\(p\to 1^+\)</span>.</p>
+</div>
+<div id="cor-max-func-properties" class="corollary theorem">
+<p><span class="theorem-title"><strong>Corollary 1</strong></span> Under the postulates <a href="#pstlt-0">(0)</a>+<a href="#pstlt-12p">(1,2)’</a>+<a href="#pstlt-3">(3)</a>. If <span class="math inline">\(f\in L^1_{loc}(d\mu)\)</span>, then <span class="math display">\[\lim_{\delta\to 0} A_\delta (f)(x) = f(x),\quad \text{a.e..}\]</span></p>
+</div>
+<p><span class="inline-detail-wrapper"> <span class="inline-detail-trigger"><strong>Proof.</strong></span> <span class="inline-detail-content"> By <a href="#pstlt-3">(3)</a>, <span class="math inline">\(\lim_{\delta\to0}\diam\, B_{\delta}(x)=0\)</span> <span class="inline-detail-wrapper"> <span class="inline-detail-trigger">(why?)</span> <span class="inline-detail-content"> By <a href="#pstlt-0">(0)</a>, <span class="math inline">\(\{\diam\,B_{\delta}(x)\}_{\delta}\searrow\)</span> when <span class="math inline">\(\delta\searrow 0\)</span>. And by <a href="#pstlt-3">(3)</a>, <span class="math inline">\(\bigcap_{\delta}\bar B_{\delta}(x)=\{x\}\)</span>. If <span class="math inline">\(\lim_{\delta\to0}\diam\, B_{\delta}(x)=d&gt;0\)</span>, then <span class="math inline">\(\exists \{y_\delta\}_\delta\)</span>, s.t. <span class="math inline">\(y_\delta\in B_{\delta}(x)\)</span> and <span class="math inline">\(|y_\delta-x|\ge d/2\)</span>. <span class="math inline">\(\because \bar B_{\delta}(x)\)</span>: compact, <span class="math inline">\(\exists\)</span> subsequence <span class="math inline">\(y_{\delta_k}\to y\in\bigcap_{\delta}\bar B_{\delta}(x)\)</span> <span class="inline-detail-wrapper"> <span class="inline-detail-trigger">(why?)</span> <span class="inline-detail-content"> Obviously, <span class="math inline">\(y\in\bigcap_{k=0}^\infty \bar B_{\delta_k}(x)\)</span> and <span class="math inline">\(\delta_k\to 0\)</span>. Hence <span class="math inline">\(\forall \delta\)</span>, <span class="math inline">\(\exists \delta_k&lt;\delta\)</span>, <span class="math inline">\(\therefore\)</span> <span class="math inline">\(y\in \bar B_{\delta_k}(x)\subset\bar B_{\delta}(x)\)</span>. </span> </span> <span class="math inline">\(=\{x\}\)</span>, but <span class="math inline">\(|y-x|\ge d/2&gt;0\)</span>, contradiction. </span> </span>. Hence we can prove the proposition in case <span class="math inline">\(f\in C^0\)</span> easily <span class="inline-detail-wrapper"> <span class="inline-detail-trigger">(really?)</span> <span class="inline-detail-content"> <span class="math inline">\(\forall x\)</span>, we have <span class="math display">\[\begin{align*}
+                    |A_\delta(f)(x)-f(x)|
+                    &amp; \le\frac{1}{\mu(B_{\delta}(x))}\int_{B_{\delta}(x)}|f(y)-f(x)|\,dy \\
+                    &amp; \le \sup_{y\in B_{\delta}(x)}|f(y)-f(x)| \\
+                    &amp; \le \sup_{y\in B_{\delta}(x)}\eps(|y-x|) \\
+                    &amp; \le \eps(\diam\,B_{\delta}(x))\to 0, \quad \delta\to 0.
+                \end{align*}\]</span> </span> </span>. In general case <span class="math inline">\(f\in L^1_{loc}\)</span>, <span class="math inline">\(f\in L^1(B_\delta(x))\)</span> for any fixed <span class="math inline">\(B_\delta(x)\)</span>. Then <span class="math inline">\(\exists g\in C_c^0(B_\delta(x))\)</span> such that <span class="math inline">\(\|f-g\|_{1}&lt;\eps\)</span> <span class="inline-detail-wrapper"> <span class="inline-detail-trigger">(note)</span> <span class="inline-detail-content"> <span class="math inline">\(X\)</span>: LCH space, <span class="math inline">\(\mu\)</span>: Radon measure. For <span class="math inline">\(1\le p &lt; \infty\)</span>, <span class="math inline">\(C_c^0(X)\)</span> is dense in <span class="math inline">\(L^p(d\mu)\)</span>. </span> </span> . Hence <span class="math display">\[\begin{align*}
+            |A_\delta(f)(x)-f(x)|
+            &amp; \le |A_\delta(f-g)(x)| + |A_\delta(g)(x)-g(x)| + |g(x)-f(x)| \\
+            &amp; \le M(f-g)(x) + |A_\delta(g)(x)-g(x)| + |(f-g)(x)|.
+        \end{align*}\]</span> Take <span class="math inline">\(\varlimsup_{\delta\to 0}\)</span>, <span class="math display">\[\varlimsup_{\delta\to 0}|A_\delta(f)(x)-f(x)|\le M(f-g)(x) + |(f-g)(x)|. \]</span> Hence <span class="math inline">\(\forall\alpha&gt;0\)</span> fixed, <span class="math display">\[\{l.h.s.&gt;\alpha\}\subset\left\{M(f-g)&gt;\frac\alpha 2\right\}\cup\left\{(f-g)&gt;\frac\alpha 2\right\}.\]</span> <span class="math display">\[\begin{align*}
+            \mu(\{l.h.s.&gt;\alpha\})
+            &amp; \le \mu\left(\left\{M(f-g)&gt;\frac\alpha 2\right\}\right)+\mu\left(\left\{(f-g)&gt;\frac\alpha 2\right\}\right) \\
+            &amp; \le \frac{2C_2}{\alpha}\|f-g\|_1+\frac{2}{\alpha}\|f-g\|_1
+            \le \frac{2(C_2+1)}{\alpha}\eps
+        \end{align*}\]</span> <span class="inline-detail-wrapper"> <span class="inline-detail-trigger">(why the second inequality?)</span> <span class="inline-detail-content"> The first term use the conclusion 2 of <a href="#thm-max-func-properties" class="quarto-xref">Theorem&nbsp;1</a>. The second term use the <em>Chebyshev’s inequality</em>: <span class="math inline">\(\forall f&gt;0\)</span>, <span class="math inline">\(f\)</span>: <span class="math inline">\(\mu\)</span>-mearsurable, we have <span class="math display">\[\alpha\mu(\{f&gt;(\ge)\alpha\})\le\int f\,d\mu\]</span> </span> </span>. By arbitrariness of <span class="math inline">\(\eps\)</span>, <span class="math display">\[\mu\left(\left\{\varlimsup_{\delta\to 0}|A_\delta(f)-f|&gt;\alpha\right\}\right)=0,\quad\forall\alpha&gt;0.\]</span> Therefore <span class="math display">\[\mu\left(\left\{\varlimsup_{\delta\to 0}|A_\delta(f)-f|&gt;0\right\}\right)=0\]</span> <span class="inline-detail-wrapper"> <span class="inline-detail-trigger">(why?)</span> <span class="inline-detail-content"> <span class="math display">\[\begin{align*}
+                    \mu\left(\left\{\varlimsup_{\delta\to 0}|A_\delta(f)-f|&gt;0\right\}\right)
+                    &amp; =\mu\left(\bigcup_\alpha \left\{\varlimsup_{\delta\to 0}|A_\delta(f)-f|&gt;\alpha\right\}\right) \\
+                    &amp; =\lim_{\alpha\to 0}\mu\left(\left\{\varlimsup_{\delta\to 0}|A_\delta(f)-f|&gt;\alpha\right\}\right) \\
+                    &amp; =\lim_{\alpha\to 0} 0=0.
+                \end{align*}\]</span> </span> </span>. Done. <span class="math inline">\(\square\)</span> </span> </span></p>
+</section>
+<section id="whitney-covering-lemma" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Whitney Covering Lemma</h1>
+<p>Introduce:</p>
+<div id="lem-traditional-whitney-cover" class="lemma theorem">
+<p><span class="theorem-title"><strong>Lemma 2 ((traditional) Whiteney covering lemma)</strong></span> Given open set <span class="math inline">\(\varnothing\ne E\subsetneq\R^n\)</span>. <span class="math inline">\(\exists\)</span> open cubes <span class="math inline">\(\{Q_k\}_{k=1}^\infty\)</span>, s.t.</p>
+<ol type="1">
+<li><p><span class="math inline">\(\{Q_k\}_{k=1}^\infty\)</span>: pairwise disjoint.</p></li>
+<li><p><span class="math inline">\(\bigcup_{k}\bar Q_k=E\)</span>.</p></li>
+<li><p>size of each cube is comparable to its distance from <span class="math inline">\(E^c\)</span>, i.e.&nbsp;<span class="math inline">\(\exists C=C(n)\)</span>, s.t. <span class="math display">\[\frac1C\diam\,Q_k\le \dist(Q_k,E^c)\le C\diam\,Q_k,\quad \forall k.\]</span></p></li>
+</ol>
+</div>
+<p>In the general setting of balls instead of cubes, we give the following not quite elegant one:</p>
+<div id="lem-whitney-cover" class="lemma theorem">
+<p><span class="theorem-title"><strong>Lemma 3 ((balls version) Whiteney covering lemma)</strong></span> Under the postulates <a href="#pstlt-0">(0)</a>+<a href="#pstlt-1">(1)</a>+<a href="#pstlt-3">(3)</a>. Given open set <span class="math inline">\(\varnothing\ne E\subsetneq\R^n\)</span>. <span class="math inline">\(\exists\)</span> balls <span class="math inline">\(\{B_k\}_{k=1}^\infty\)</span>, s.t.</p>
+<ol type="1">
+<li><p><span class="math inline">\(\{B_k\}_{k=1}^\infty\)</span>: pairwise disjoint.</p></li>
+<li><p><span class="math inline">\(\bigcup_{k}B_k^*=E\)</span>.</p></li>
+<li><p><span class="math inline">\(B_k^{**}\cap E^c\ne\varnothing\)</span>, <span class="math inline">\(\forall k\)</span>.</p></li>
+</ol>
+<p>where for <span class="math inline">\(B=B_\delta(x)\)</span>, define <span class="math inline">\(B^*:=B_{C^*\delta}(x)\)</span>, <span class="math inline">\(B^{**}:=B_{C^{**}\delta}(x)\)</span>, <span class="math inline">\(C^*\)</span>, <span class="math inline">\(C^{**}\)</span> are constants depend only on <span class="math inline">\(C_1\)</span> in postulate <a href="#pstlt-1">(1)</a> with <span class="math inline">\(1&lt;C^*&lt;C^{**}\)</span>.</p>
+</div>
+<p><span class="inline-detail-wrapper"> <span class="inline-detail-trigger"><strong>Proof.</strong></span> <span class="inline-detail-content"> <span class="math inline">\(\eps&gt;0\)</span>: sufficiently small constant (in fact <span class="math inline">\(\eps\le\frac1 {C_1}\)</span>). Define a collection of balls <span class="math display">\[\mathcal B:= \{B_{\eps\delta_x}(x)\}_{x\in E},\quad \text{where $\delta_x:=\sup\{\delta:B_\delta(x)\subset E\}$},\]</span> <span class="inline-detail-wrapper"> <span class="inline-detail-trigger">(note)</span> <span class="inline-detail-content"> By <a href="#pstlt-3">(3)</a>, <span class="math inline">\(0&lt;\delta_x&lt;\infty\)</span>, <span class="math inline">\(\forall x\in E\)</span>. </span> </span>. Constuct desired balls: select a maximal disjoint subcollection of <span class="math inline">\(\mathcal B\)</span>, denoted by <span class="math display">\[\mathcal B':=\{B_k=B_{\eps\delta_k}(x_k)\}_{k=1}^\infty.\]</span> Pick <span class="math inline">\(C^{**}&gt;\frac{1}{\eps}\)</span>, <span class="math inline">\(C^* &lt; C^{**}\)</span>: to be decided. Obviously, <span class="math inline">\(\mathcal B'\)</span> satisfies conclusion 1 and 3. What remains is conclusion 2. It’s enough to just show <span class="math inline">\(\bigcup_k B^*_k\supset E\)</span>. <span class="math inline">\(\forall x\in E\)</span>, if <span class="math inline">\(B_{\eps\delta_x}(x)\in\mathcal B'\)</span>, done; if not, then by the maximaltity of <span class="math inline">\(\mathcal B'\)</span>, <span class="math inline">\(\exists B_k=B_{\eps\delta_k}(x_k)\)</span>, s.t. <span class="math display">\[B_{\eps\delta_k}(x_k)\cap B_{\eps\delta_x}(x)\ne \varnothing.\]</span> <span class="math inline">\(\because \eps\)</span> small enough, we can enlarge their radii to <span class="math inline">\(\forall R\ge\max\{\eps\delta_x,\eps\delta_k\}\)</span>. Then <span class="math inline">\(B_{R}(x_k)\cap B_{R}(x)\ne \varnothing\)</span>. By <a href="#pstlt-1">(1)</a>, <span class="math display">\[B_R(x_k)\subset B_{C_1R}(x),\quad \forall R\ge\max\{\eps\delta_x,\eps\delta_k\}.\]</span> Hence we claim that: if we further let enlarge factor <span class="math inline">\(R&gt;\delta_k\)</span> (we can always do this), then <span class="math inline">\(C_1R\ge\delta_x\)</span>, because when <span class="math inline">\(C_1R&lt;\delta_x\)</span>, there is a contradiction <span class="inline-detail-wrapper"> <span class="inline-detail-trigger">(why?)</span> <span class="inline-detail-content"> <span class="math inline">\(\because\)</span> in that case, <span class="math inline">\(B_R(x_k)\cap E^c\ne\varnothing\)</span> and <span class="math inline">\(B_R(x_k)\subset B_{C_1R}(x)\subset B_{\delta_x}(x)\subset E\)</span>. It’s impossiable. </span> </span>. Because the above claim holds for <span class="math inline">\(\forall R\)</span>, thus <span class="math inline">\(\delta_k\ge\delta_x/C_1\)</span>. So use <a href="#pstlt-0">(0)</a>, <a href="#pstlt-1">(1)</a> and <span class="math inline">\(B_{\eps\delta_k}(x_k)\cap B_{\eps\delta_x}(x)\ne \varnothing\)</span>, we have <span class="math display">\[x\in B_{\eps\delta_x}(x)\subset B_{\eps C_1\delta_k}(x)\subset B_{\eps C_1^2\delta_k}(x_k)\]</span> <span class="inline-detail-wrapper"> <span class="inline-detail-trigger">(note)</span> <span class="inline-detail-content"> Why must here use <span class="math inline">\(x\in B_{\eps\delta_x}(x)\)</span>? In fact, <span class="math inline">\(x\in\)</span> any ball with center <span class="math inline">\(x\)</span>. But for smaller radius, we’re not sure whether have <span class="math inline">\(B_{\eps\delta_k}(x_k)\cap B_{\eps\delta_x}(x)\ne \varnothing\)</span>. So here use <span class="math inline">\(x\in B_{\eps\delta_x}(x)\)</span> is the best choice. </span> </span>. <span class="math inline">\(\because\eps\)</span> small enough, it’s easy to let <span class="math inline">\(\eps C_1^2\le C^*\)</span>. So we let <span class="math inline">\(C^*\in[\eps C_1^2,\frac1\eps]\)</span> is ok. <span class="math inline">\(\square\)</span> </span> </span></p>
+<div id="rem-whitney-cover-1" class="proof remark">
+<p><span class="proof-title"><em>Remark 2</em>. </span>Conclusion 3 cannot be replaced by “<span class="math inline">\(B_k^{**}\cap\partial E\ne\varnothing\)</span>”. Because <span class="math inline">\(B_k^{**}\)</span> may not connected. It may touch <span class="math inline">\(E\)</span> and <span class="math inline">\(E^c\)</span> at same time but not touch <span class="math inline">\(\partial E\)</span>.</p>
+</div>
+<div id="rem-whitney-cover-2" class="proof remark">
+<p><span class="proof-title"><em>Remark 3</em>. </span>From above lemma, we can pick sets <span class="math inline">\(\{\tilde{B}_k\}_{k=1}^\infty\)</span> s.t. <span class="math inline">\(\{\tilde B_k\}_{k=1}^\infty\)</span>: pairwise disjoint, <span class="math inline">\(\bigcup_k \tilde B_k=E\)</span> and <span class="math inline">\(B_k\subset\tilde B_k\subset B^*_k\)</span>. For example, <span class="math display">\[\tilde B_k:=B^*_k-\left(\bigcup_{j&lt;k}\tilde B_j\right)-\left(\bigcup_{j&gt;k}B_k\right).\]</span></p>
+</div>
+<div id="fig-rem-whitney-cover-2" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rem-whitney-cover-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/rem-whitney-cover-2.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rem-whitney-cover-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: An example of how to define <span class="math inline">\(\tilde B_k\)</span>.
+</figcaption>
+</figure>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

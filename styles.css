@@ -1,0 +1,11 @@
+@media (min-width: 992px) {
+  div.quarto-about-trestles .about-entity {
+    flex: 0 0 32%;
+    min-width: 0;
+  }
+
+  div.quarto-about-trestles .about-contents {
+    flex: 1;
+    min-width: 0;
+  }
+}
